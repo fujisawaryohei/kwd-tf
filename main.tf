@@ -1,3 +1,7 @@
+# terraform.tfvars
+variable "ec2_key_name" { type = string }
+variable "ec2_pub_key_path" { type = string }
+
 # NetWork Configurations
 module "vpc" {
   source  = "./modules/network/vpc"
@@ -34,9 +38,11 @@ module "ec2_sg" {
 }
 
 module "ec2" {
-  source    = "./modules/ec2"
-  common    = var.common
-  ec2       = var.ec2
-  subnet_id = module.inspection_subnet.id
-  sg_ids    = [module.ec2_sg.id]
+  source       = "./modules/ec2"
+  common       = var.common
+  ec2          = var.ec2
+  subnet_id    = module.inspection_subnet.id
+  sg_ids       = [module.ec2_sg.id]
+  key_name     = var.ec2_key_name
+  pub_key_path = var.ec2_pub_key_path
 }
