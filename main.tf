@@ -31,12 +31,20 @@ module "inspection_subnet_rtb" {
   igw_id    = module.vpc_igw.id
 }
 
+module "ec2_eip" {
+  source     = "./modules/network/eip"
+  common     = var.common
+  ec2_id     = module.ec2.id
+  depends_on = [ module.ec2 ]
+}
+
 module "ec2_sg" {
   source = "./modules/network/sg"
   sg     = var.ec2-sg
   vpc_id = module.vpc.id
 }
 
+# App
 module "ec2" {
   source       = "./modules/ec2"
   common       = var.common

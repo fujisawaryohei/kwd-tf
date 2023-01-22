@@ -59,15 +59,15 @@ variable "ec2-sg" {
       rules = [ 
         {
           cidr_blocks = [ "0.0.0.0/0" ]
-          from_port   = 80
-          protocol    = "TCP"
+          from_port   = 80          
           to_port     = 80
+          protocol    = "TCP"
         },
         {
           cidr_blocks = [ "0.0.0.0/0" ]
           from_port   = 22
-          protocol    = "TCP"
           to_port     = 22
+          protocol    = "TCP"
         }
       ]
     }
@@ -76,9 +76,9 @@ variable "ec2-sg" {
       rules = [ 
         {
           cidr_blocks = [ "0.0.0.0/0" ]
-          from_port   = -1
-          to_port     = -1
-          protocol    = "0"
+          from_port   = 0
+          to_port     = 0
+          protocol    = "-1"
         } 
       ]
     }

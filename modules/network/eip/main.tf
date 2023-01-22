@@ -2,7 +2,7 @@ resource "aws_eip" "eip" {
   vpc = true
 
   tags = {
-    Name: "${var.common.app_name}-${var.common.env}-igw"
+    Name: "${var.common.app_name}-${var.common.env}-eip"
   }
 }
 

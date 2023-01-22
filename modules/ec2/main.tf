@@ -18,5 +18,5 @@ resource "aws_instance" "ec2" {
 
 resource "aws_key_pair" "ec2_key" {
   key_name   = var.key_name
-  public_key = var.pub_key_path
+  public_key = file(var.pub_key_path)
 }
