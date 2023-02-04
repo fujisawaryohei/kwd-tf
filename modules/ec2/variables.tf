@@ -3,7 +3,22 @@ variable "common" {
 }
 
 variable "ec2" {
-  type = map(any)
+  type = object({
+    ami_id = string
+    instance_type = string
+    root_volume = object({
+      device_name = string
+      volume_size = number
+      encrypted = bool
+      delete_on_terminate = bool
+    })
+    second_volume = object({
+      device_name = string
+      volume_size = number
+      encrypted = bool
+      delete_on_terminate = bool
+    })
+  })
 }
 
 variable "subnet_id" {

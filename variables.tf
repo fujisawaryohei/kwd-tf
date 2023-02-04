@@ -86,11 +86,37 @@ variable "ec2-sg" {
 }
 
 variable "ec2" {
-  type = map(any)
+  type = object({
+    ami_id = string
+    instance_type = string
+    root_volume = object({
+      device_name = string
+      volume_size = number
+      encrypted = bool
+      delete_on_terminate = bool
+    })
+    second_volume = object({
+      device_name = string
+      volume_size = number
+      encrypted = bool
+      delete_on_terminate = bool
+    })
+  })
 
   default = {
     ami_id          = "ami-02c3627b04781eada"
     instance_type   = "t3.micro"
-    ebs_volume_size = 150
+    root_volume = {
+      device_name = "/dev/sda1"
+      volume_size = 100
+      encrypted = false
+      delete_on_terminate = false
+    }
+    second_volume = {
+      device_name = "/dev/sdf1"
+      volume_size = 100
+      encrypted = false
+      delete_on_terminate = false
+    }
   }
 }
